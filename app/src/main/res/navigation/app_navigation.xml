@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.nennos.kointestapp.ui.fragment.MainFragment"
+        android:label="@string/title_users"
+        tools:layout="@layout/fr_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.nennos.kointestapp.ui.fragment.UserFragment"
+        android:label="@string/title_user_details"
+        tools:layout="@layout/fr_user" />
+
+</navigation>
