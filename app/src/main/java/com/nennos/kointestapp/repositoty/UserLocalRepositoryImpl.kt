@@ -10,6 +10,8 @@ class UserLocalRepositoryImpl(private val userDao: UserDao) : UserLocalRepositor
 
     override fun loadUsers(): LiveData<List<User>> = userDao.getAll()
 
+    override fun loadUser(userId: Long): LiveData<User> = userDao.getUser(userId)
+
     override suspend fun saveUsers(users: List<User>) = withContext(Dispatchers.IO) {
         userDao.insertAll(*users.toTypedArray())
     }

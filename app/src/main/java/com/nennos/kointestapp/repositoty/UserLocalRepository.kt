@@ -7,5 +7,7 @@ interface UserLocalRepository {
 
     fun loadUsers() : LiveData<List<User>>
 
+    fun loadUser(userId: Long) : LiveData<User>
+
     suspend fun saveUsers(users: List<User>)
 }

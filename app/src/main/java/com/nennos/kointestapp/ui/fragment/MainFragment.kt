@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +18,8 @@ import com.nennos.kointestapp.R
 import com.nennos.kointestapp.databinding.FrMainBinding
 import com.nennos.kointestapp.db.models.User
 import com.nennos.kointestapp.ui.adapter.UsersAdapter
+import com.nennos.kointestapp.utils.Const
+import com.nennos.kointestapp.utils.Const.BUNDLE_USER_ID_KEY
 import com.nennos.kointestapp.utils.OnItemListener
 import kotlinx.android.synthetic.main.fr_main.*
 import org.koin.android.ext.android.inject
@@ -60,7 +63,10 @@ class MainFragment : Fragment(), OnItemListener {
     }
 
     override fun onItemClicked(user: User) {
-        view?.findNavController()?.navigate(R.id.action_mainFragment_to_userFragment)
+        view?.findNavController()?.navigate(
+            R.id.action_mainFragment_to_userFragment,
+            bundleOf(BUNDLE_USER_ID_KEY to user.id)
+        )
     }
 
 }

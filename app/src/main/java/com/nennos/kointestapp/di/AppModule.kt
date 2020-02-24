@@ -10,6 +10,7 @@ import com.nennos.kointestapp.repositoty.UserLocalRepositoryImpl
 import com.nennos.kointestapp.repositoty.UserNetworkRepository
 import com.nennos.kointestapp.repositoty.UserNetworkRepositoryImpl
 import com.nennos.kointestapp.ui.fragment.MainFragmentViewModel
+import com.nennos.kointestapp.ui.fragment.UserViewModel
 import com.nennos.kointestapp.utils.Const.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -31,6 +32,8 @@ val repositoryModule = module {
 val viewModule = module {
 
     viewModel { MainFragmentViewModel(get(), get()) }
+
+    viewModel { UserViewModel(get()) }
 }
 
 val dbModule = module {

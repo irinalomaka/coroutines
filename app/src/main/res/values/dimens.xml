@@ -5,6 +5,7 @@
     <dimen name="margin_padding_tiny">4dp</dimen>
 
     <dimen name="width_height_img">48dp</dimen>
+    <dimen name="width_height_img_large">88dp</dimen>
 
     <!--default text-->
     <dimen name="main_text_size">16sp</dimen>
