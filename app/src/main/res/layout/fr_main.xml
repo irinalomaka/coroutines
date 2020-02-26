@@ -18,5 +18,5 @@
         android:layout_height="match_parent"
         android:paddingTop="@dimen/margin_padding_tiny"
         android:paddingBottom="@dimen/margin_padding_tiny"
-        app:userList="@{viewModel.userList}" />
+        app:userList="@{viewModel.usersLiveData}" />
 </layout>

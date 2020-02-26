@@ -20,6 +20,13 @@
         android:id="@+id/userFragment"
         android:name="com.nennos.kointestapp.ui.fragment.UserFragment"
         android:label="@string/title_user_details"
-        tools:layout="@layout/fr_user" />
+        tools:layout="@layout/fr_user" >
+
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

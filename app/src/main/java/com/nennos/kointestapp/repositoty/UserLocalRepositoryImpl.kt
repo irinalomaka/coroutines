@@ -8,11 +8,14 @@ import kotlinx.coroutines.withContext
 
 class UserLocalRepositoryImpl(private val userDao: UserDao) : UserLocalRepository {
 
-    override fun loadUsers(): LiveData<List<User>> = userDao.getAll()
+    override fun loadUsersLiveData(): LiveData<List<User>> = userDao.getAll()
 
-    override fun loadUser(userId: Long): LiveData<User> = userDao.getUser(userId)
+    override fun loadUser(userId: Long): User = userDao.getUser(userId)
 
     override suspend fun saveUsers(users: List<User>) = withContext(Dispatchers.IO) {
         userDao.insertAll(*users.toTypedArray())
     }
+
+    override fun loadUsers(): List<User> = userDao.getUsers()
+
 }

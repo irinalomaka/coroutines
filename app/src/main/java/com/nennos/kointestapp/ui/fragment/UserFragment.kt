@@ -5,26 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nennos.kointestapp.databinding.FrUserBinding
-import com.nennos.kointestapp.db.models.User
-import com.nennos.kointestapp.utils.Const.BUNDLE_USER_ID_KEY
 import kotlinx.android.synthetic.main.fr_user.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserFragment : Fragment() {
 
     private val userModel: UserViewModel by viewModel()
-    private lateinit var userLiveData: LiveData<User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireArguments().apply {
-            userLiveData = userModel.loadUser(getLong(BUNDLE_USER_ID_KEY))
-        }
+        userModel.loadUser(UserFragmentArgs.fromBundle(arguments).userId?.toLong() ?: 0)
     }
 
     override fun onCreateView(
@@ -40,19 +34,12 @@ class UserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userLiveData.observe(viewLifecycleOwner, Observer {
-            userModel.setupData(it)
-            loadAvatar(it.avatarUrl)
-
+        userModel.urlLiveData.observe(viewLifecycleOwner, Observer {
+            loadAvatar(it)
         })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        userLiveData.removeObservers(this)
-    }
-
-    fun loadAvatar(url: String) {
+    private fun loadAvatar(url: String) {
         Glide.with(requireContext())
             .load(url)
             .apply(RequestOptions.circleCropTransform())

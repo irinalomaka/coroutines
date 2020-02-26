@@ -2,4 +2,6 @@
     <string name="app_name">KoinTestApp</string>
     <string name="title_users">Users</string>
     <string name="title_user_details">Details</string>
+    <string name="title_error">Oops!!</string>
+    <string name="button_ok">Ok</string>
 </resources>

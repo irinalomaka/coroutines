@@ -5,5 +5,5 @@ import retrofit2.Response
 
 interface UserNetworkRepository {
 
-    suspend fun fetchUsers(): Response<List<UserNetwork>>
+     suspend fun fetchUsers(): Response<List<UserNetwork>>
 }

@@ -15,12 +15,16 @@
         <item name="colorControlNormal">@color/colorWhite</item>
     </style>
 
-
     <style name="ToolbarStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="titleTextColor">@android:color/white</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
     </style>
 
 </resources>

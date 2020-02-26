@@ -5,9 +5,11 @@ import com.nennos.kointestapp.db.models.User
 
 interface UserLocalRepository {
 
-    fun loadUsers() : LiveData<List<User>>
+    fun loadUsersLiveData(): LiveData<List<User>>
 
-    fun loadUser(userId: Long) : LiveData<User>
+    fun loadUsers(): List<User>
+
+    fun loadUser(userId: Long): User
 
     suspend fun saveUsers(users: List<User>)
 }
