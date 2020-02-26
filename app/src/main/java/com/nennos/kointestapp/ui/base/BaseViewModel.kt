@@ -10,12 +10,12 @@ import org.json.JSONObject
 
 abstract class BaseViewModel : ViewModel() {
 
-    val errorLiveDatata = MutableLiveData<String>()
+    val errorLiveData = MutableLiveData<String>()
 
     private val completableJob = Job()
     protected val coroutineScope = CoroutineScope(Dispatchers.IO + completableJob)
 
-    protected fun getErrorMessage(responseBody: ResponseBody?): String? {
+    private fun getErrorMessage(responseBody: ResponseBody?): String? {
         return responseBody?.let {
             try {
                 val jsonObject = JSONObject(responseBody.string())
@@ -27,7 +27,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected fun handleError(error: ResponseBody?) {
-        errorLiveDatata.postValue(getErrorMessage(error))
+        errorLiveData.postValue(getErrorMessage(error))
     }
 
     override fun onCleared() {

@@ -32,7 +32,6 @@ class MainFragment : BaseFragment(), OnItemListener, DialogInterface.OnClickList
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.apply {
@@ -40,7 +39,7 @@ class MainFragment : BaseFragment(), OnItemListener, DialogInterface.OnClickList
             layoutManager = LinearLayoutManager(context)
         }
 
-        mainModel.errorLiveDatata.observe(viewLifecycleOwner, Observer {
+        mainModel.errorLiveData.observe(viewLifecycleOwner, Observer {
             showAlertDialog(
                 getString(R.string.title_error),
                 it,
