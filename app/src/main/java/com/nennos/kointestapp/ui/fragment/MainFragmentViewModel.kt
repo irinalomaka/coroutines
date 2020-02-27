@@ -2,7 +2,6 @@ package com.nennos.kointestapp.ui.fragment
 
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.nennos.kointestapp.db.models.User
 import com.nennos.kointestapp.repositoty.UserLocalRepository
 import com.nennos.kointestapp.repositoty.UserNetworkRepository
@@ -28,9 +27,11 @@ class MainFragmentViewModel(
         coroutineScope.async {
             val response = networkRepository.fetchUsers()
             if (response.isSuccessful) {
-                localRepository.saveUsers(
-                    Mappers.mapNetworkModelsToEntity(response.body() ?: emptyList())
-                )
+                withContext(Dispatchers.IO) {
+                    localRepository.saveUsers(
+                        Mappers.mapNetworkModelsToEntity(response.body() ?: emptyList())
+                    )
+                }
             } else {
                 handleError(response.errorBody())
             }
@@ -38,13 +39,11 @@ class MainFragmentViewModel(
     }
 
     private fun loadUsers() {
-        viewModelScope.async {
-            var users: List<User>? = null
-            withContext(Dispatchers.IO) {
-                users = localRepository.loadUsers()
+        coroutineScope.async {
+            var users = localRepository.loadUsers()
+            withContext(Dispatchers.Main) {
+                usersLiveData.value = users
             }
-
-            usersLiveData.value = users
         }
     }
 }

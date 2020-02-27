@@ -1,7 +1,6 @@
 package com.nennos.kointestapp.ui.fragment
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.nennos.kointestapp.db.models.User
 import com.nennos.kointestapp.repositoty.UserLocalRepository
 import com.nennos.kointestapp.ui.base.BaseViewModel
@@ -17,13 +16,11 @@ class UserViewModel(private val localRepository: UserLocalRepository) : BaseView
     var urlLiveData = MutableLiveData("")
 
     fun loadUser(userId: Long) {
-        viewModelScope.async {
-            var user: User? = null
-            withContext(Dispatchers.IO) {
-                user = localRepository.loadUser(userId)
+        coroutineScope.async {
+            var user = localRepository.loadUser(userId)
+            withContext(Dispatchers.Main) {
+                setupData(user)
             }
-
-            setupData(user)
         }
     }
 

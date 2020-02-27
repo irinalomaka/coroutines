@@ -6,8 +6,6 @@ import retrofit2.Response
 
 class UserNetworkRepositoryImpl(private val networkApi: Api) : UserNetworkRepository {
 
-    override suspend fun fetchUsers(): Response<List<UserNetwork>> {
-        return networkApi.fetchUsers()
-    }
+    override suspend fun fetchUsers(): Response<List<UserNetwork>> = networkApi.fetchUsers()
 
 }
